@@ -1,0 +1,356 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+html {
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+    font-family: 'Roboto', sans-serif;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.account-link{
+    font-family: 'Roboto', sans-serif;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    height: 80px;
+    background-color: white;
+    color: white;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 98vw;
+    z-index: 1000;
+}
+
+.contains-session-info {
+    color: black;
+}
+
+input {
+    font-family: 'Roboto', sans-serif;
+    font-size: large;
+    font-weight: 500;
+    border: 2px solid rgb(92, 25, 149);
+    background-color: rgba(92, 25, 149, 0.25);
+    border-radius: 5px;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    height: 95vh;
+}
+
+.contains-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    align-items: left;
+    margin-top: 72px;
+    margin-left: 10px;
+}
+
+.logo {
+    width: 180px;
+}
+
+#logo-login {
+    width: 500px;
+}
+
+#logo-header {
+    width: 200px;
+}
+
+.spacer {
+    flex: 1;
+}
+
+
+md-filled-tonal-button {
+    width: 180px;
+    --mdc-theme-primary: #5C1995;
+    --mdc-theme-on-primary: white;
+
+}
+
+md-filled-tonal-button[disabled] {
+    border: 2px solid #5C1995;
+}
+
+.button {
+    color: white;
+    display: inline-block; /* Inline elements with width and height. TL;DR they make the icon buttons stack from left-to-right instead of top-to-bottom */
+    position: relative; /* All 'absolute'ly positioned elements are relative to this one */
+    padding: 2px 5px; /* Add some padding so it looks nice */
+  }
+
+  .button:hover {
+    cursor: pointer;
+  }
+
+.button__badge {
+    background-color: #fa3e3e;
+    border-radius: 2px;
+    color: white;
+   
+    padding: 1px 3px;
+    font-size: 10px;
+    
+    position: absolute; /* Position the badge within the relatively positioned button */
+    top: 0;
+    right: 0;
+  }
+
+
+md-icon {
+    color: #5C1995;
+    box-shadow: none;
+}
+
+.rounded {
+    --md-icon-font: 'Material Symbols Rounded';
+}
+
+.sharp {
+    --md-icon-font: 'Material Symbols Sharp';
+}
+
+md-icon[filled] {
+    font-variation-settings: 'FILL' 1;
+}
+
+
+.login {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.contains-page {
+    height: 100%;
+    width: 97vw;
+    display: flex;
+    position: absolute;
+    flex-direction: column;
+    justify-content: left;
+    align-items: center;
+    margin-top: 80px;
+}
+
+.page-title {
+    width: 100%;
+    font-size: 1.5em;
+    font-weight: 500;
+    color: #5C1995;
+}
+
+form {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.create-modal {
+    width: 800px;
+}
+
+#sign-up-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+#delete-account-form, #delete-document-form{
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    align-items: left;
+    gap: 10px;
+}
+
+#create-document-form, #view-document-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.lat-menu {
+    position: fixed;
+    left: 0;
+    padding-top: 10px;
+    padding-bottom: 8px;
+    padding-left: 10px;
+    padding-right: 130px;
+    margin-top: 36px;
+    height: 40px;
+    width: 98vw;
+    background: #461c68;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    z-index: 1000;
+}
+
+.article-table {
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.article-info, .user-info{
+    width: 85vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    margin-top:10px;
+    margin-bottom: 10px;
+}
+
+.password-info,.delete-account{
+    width: 85vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: center;
+    gap: 10px;
+    margin-top:10px;
+    margin-bottom: 10px;
+}
+
+#my-documents-list,#search-documents-list, #other-notifications-list, #edit-requests-list {
+    width: 85vw;
+}
+
+#description-text-input {
+    height: 100px;
+    width: 400px;
+    resize: none;
+}
+
+.option-buttons {
+    width: 85vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    gap: 10px;
+    margin-bottom: 10px;
+
+    >md-filled-tonal-button {
+        width: 200px;
+        --mdc-theme-primary: #5C1995;
+        --mdc-theme-on-primary: white;
+
+    }
+}
+
+.document-more-options:hover {
+    cursor: pointer;
+}
+
+.option-tabs {
+    width: 85vw
+}
+
+.search-bar {
+    width: 85vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 10px;
+    
+}
+
+/*
+md-primary-tab{
+     --md-primary-tab-container-color: rgba(92, 25, 149, 0.25); 
+}
+*/
+
+@media screen and (max-width: 600px) {
+    .container {
+        height: 100vh;
+        background-color: red;
+    }
+
+
+}
+
+/* Animación para el loader */
+
+.lds-dual-ring,
+.lds-dual-ring:after {
+    box-sizing: border-box;
+}
+
+.lds-dual-ring {
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+}
+
+.lds-dual-ring:after {
+    content: " ";
+    display: block;
+    width: 64px;
+    height: 64px;
+    margin: 8px;
+    border-radius: 50%;
+    border: 6.4px solid currentColor;
+    border-color: currentColor transparent currentColor transparent;
+    animation: lds-dual-ring 1.2s linear infinite;
+}
+
+@keyframes lds-dual-ring {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* quita el estilo de los enlaces */
+a.nostyle:link {
+    text-decoration: inherit;
+    color: inherit;
+    cursor: auto;
+}
+
+a.nostyle:visited {
+    text-decoration: inherit;
+    color: inherit;
+    cursor: auto;
+}
