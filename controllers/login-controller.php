@@ -20,7 +20,7 @@ class LoginController
             $correo = $_POST["correo"];
             $pssword = $_POST["pssword"];
             if ($this->loginService->login($correo, $pssword)) {
-                header("location:index.php");
+                header("Location:my-documents.php");
             } else {
                 echo '<p style="margin:0px; color:red"> Usuario o contraseña incorrectos </p>';
             }
