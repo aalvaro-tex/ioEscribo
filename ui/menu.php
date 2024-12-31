@@ -31,9 +31,6 @@
     include("ui/header.php");
     ?>
     <div class="lat-menu">
-        <md-filled-tonal-button href="index.php">
-            Inicio
-        </md-filled-tonal-button>
         <md-filled-tonal-button href="my-documents.php">
             Mis artículos
         </md-filled-tonal-button>

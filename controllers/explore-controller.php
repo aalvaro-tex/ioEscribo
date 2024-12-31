@@ -1,43 +1,50 @@
-<?php 
+<?php
 include("controllers/conexion_bd.php");
 include("services/explore-service.php");
 
-class ExploreController{
-    
-        private $exploreService;
-        private $login;
-    
-        public function __construct()
-        {
-            $this->exploreService = new ExploreService();
-            $this->login = $_SESSION["correo"];
+class ExploreController
+{
 
-        }
-    
-        public function getAllCategories()
-        {
-            $result = $this->exploreService->getAllCategories();
-            return $result;
-        }
+    private $exploreService;
+    private $login;
 
-        public function getArticleById($id)
-        {
-            return $this->exploreService->getArticleById($id);
-        }
+    public function __construct()
+    {
+        $this->exploreService = new ExploreService();
+        $this->login = $_SESSION["correo"];
 
-        public function search($titulo, $id_categoria){
-            return $this->exploreService->search($titulo, $id_categoria);
-        }
+    }
 
-        public function getRol($id_documento)
-        {
-            return $this->exploreService->getRol($id_documento, $this->login);
-        }
+    public function getAllCategories()
+    {
+        $result = $this->exploreService->getAllCategories();
+        return $result;
+    }
 
-        public function sendEditRequest($autor, $solicitante, $id_articulo)
-        {
-            return $this->exploreService->sendEditRequest($autor, $solicitante, $id_articulo);
-        }
+    public function getArticleById($id)
+    {
+        return $this->exploreService->getArticleById($id);
+    }
+
+    public function getCategoryName($id)
+    {
+        return $this->exploreService->getCategoryName($id);
+    }
+
+    public function search($titulo, $id_categoria)
+    {
+        return $this->exploreService->search($titulo, $id_categoria);
+    }
+
+    public function getRol($id_documento)
+    {
+        return $this->exploreService->getRol($id_documento, $this->login);
+    }
+
+    public function sendEditRequest($autor, $solicitante, $id_articulo)
+    {
+        return $this->exploreService->sendEditRequest($autor, $solicitante, $id_articulo);
+    }
 }
 
 if (!empty($_POST["search-articles"])) {

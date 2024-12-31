@@ -61,47 +61,58 @@ $myNotificationsController = new MyNotificationsController();
                 <md-list id="edit-requests-list">
                     <?php
                     $searchResult = $myNotificationsController->getNotifications();
-                    foreach ($searchResult as $row):
-                        ?>
+                    if ($searchResult->num_rows === 0): ?>
                         <md-list-item>
-                            El usuario <span style="font-weight:600"><?php echo $row['solicitante']; ?> </span> ha
-                            solicitado editar
-                            el artículo
-                            <span style="font-weight:600"><?php echo $row['titulo']; ?></span>
-                            <form id="request-form" method="post" slot="end">
-                                <input type="hidden" name="id_solicitud" value="<?php echo $row['id']; ?>">
-                                <md-filled-tonal-icon-button type="submit" name="accept-request" form="request-form"
-                                    value="Aceptar">
-                                    <md-icon>check_circle</md-icon>
-                                </md-filled-tonal-icon-button>
-                                <md-filled-tonal-icon-button type="submit" name="reject-request" form="request-form"
-                                    value="Rechazar">
-                                    <md-icon>cancel</md-icon>
-                                </md-filled-tonal-icon-button>
-                            </form>
+                            <md-icon slot="start">notifications_off</md-icon> No se encontraron resultados
                         </md-list-item>
-                        <md-divider inset></md-divider>
-                    <?php endforeach;
+                    <?php else:
+                        foreach ($searchResult as $row):
+                            ?>
+                            <md-list-item>
+                                El usuario <span style="font-weight:600"><?php echo $row['solicitante']; ?> </span> ha
+                                solicitado editar
+                                el artículo
+                                <span style="font-weight:600"><?php echo $row['titulo']; ?></span>
+                                <form id="request-form" method="post" slot="end">
+                                    <input type="hidden" name="id_solicitud" value="<?php echo $row['id']; ?>">
+                                    <md-filled-tonal-icon-button type="submit" name="accept-request" form="request-form"
+                                        value="Aceptar">
+                                        <md-icon>check_circle</md-icon>
+                                    </md-filled-tonal-icon-button>
+                                    <md-filled-tonal-icon-button type="submit" name="reject-request" form="request-form"
+                                        value="Rechazar">
+                                        <md-icon>cancel</md-icon>
+                                    </md-filled-tonal-icon-button>
+                                </form>
+                            </md-list-item>
+                            <md-divider inset></md-divider>
+                        <?php endforeach; endif;
                     ?>
                 </md-list>
             </div>
         </div>
 
         <!-- contiene las solicitudes que nos han acepato o rechazado a nosotros -->
-        <div id="other-notifications-panel" role="tabpanel" aria-labelledby="other-notifications-tab" style="display:none;">
+        <div id="other-notifications-panel" role="tabpanel" aria-labelledby="other-notifications-tab"
+            style="display:none;">
             <div class="article-table">
                 <md-list id="other-notifications-list">
                     <?php
                     $searchResult = $myNotificationsController->getMyOtherNotifications();
-                    foreach ($searchResult as $row):
-                        ?>
+                    if ($searchResult->num_rows === 0): ?>
                         <md-list-item>
-                            Tu solicitid para editar el artículo <span
-                                style="font-weight:600"><?php echo $row['titulo']; ?></span>
-                            ha sido <span style="font-weight:600"><?php echo $row['estado']; ?></span>
+                            <md-icon slot="start">notifications_off</md-icon> No se encontraron resultados
                         </md-list-item>
-                        <md-divider inset></md-divider>
-                    <?php endforeach;
+                    <?php else:
+                        foreach ($searchResult as $row):
+                            ?>
+                            <md-list-item>
+                                Tu solicitid para editar el artículo <span
+                                    style="font-weight:600"><?php echo $row['titulo']; ?></span>
+                                ha sido <span style="font-weight:600"><?php echo $row['estado']; ?></span>
+                            </md-list-item>
+                            <md-divider inset></md-divider>
+                        <?php endforeach; endif;
                     ?>
                 </md-list>
             </div>

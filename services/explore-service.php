@@ -21,10 +21,19 @@ class ExploreService
         return $result;
     }
 
-    public function getArticleById($id){
+    public function getArticleById($id)
+    {
         $article_query = "SELECT * FROM articulo WHERE id = '$id'";
         $result = $this->conexion->query($article_query);
         return $result;
+    }
+
+    public function getCategoryName($id)
+    {
+        $category_query = "SELECT nombre FROM categoria WHERE id = '$id'";
+        $result = $this->conexion->query($category_query);
+        $category = mysqli_fetch_object($result);
+        return $category->nombre;
     }
 
     public function search($titulo, $id_categoria)
@@ -60,7 +69,8 @@ class ExploreService
         return mysqli_fetch_object($result);
     }
 
-    public function sendEditRequest($autor, $solicitante, $id_articulo){
+    public function sendEditRequest($autor, $solicitante, $id_articulo)
+    {
         $request_query = "INSERT INTO solicitud (autor, solicitante, id_articulo) 
         VALUES ('$autor', '$solicitante', '$id_articulo')";
         $result = $this->conexion->query($request_query);

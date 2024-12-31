@@ -31,6 +31,9 @@
 <body>
     <?php
     session_start();
+    if (!isset($_SESSION["nombre"])) {
+        header("Location: login.php");
+    }
     ?>
     <div class="header">
         <img src="./assets/img/ioEscribo_logo.png" alt="Logo" class="logo" id="logo-header" />
@@ -47,7 +50,6 @@
             <md-filled-tonal-icon-button href="my-notifications.php">
                 <md-icon>notifications</md-icon>
             </md-filled-tonal-icon-button>
-            <span class="button__badge"><?php print_r($_SESSION['solicitudes'])?></span>
         </div>
         <md-filled-tonal-icon-button href="profile.php">
             <md-icon>account_circle</md-icon>

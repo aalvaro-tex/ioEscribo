@@ -70,7 +70,11 @@ $editPermissionsController = new EditPermissionsController();
             <?php
             $menu_id = 0;
             $collabs = $editPermissionsController->getCollaborators($editPermissionsController->id_articulo);
-            if ($collabs) {
+            if ($collabs->num_rows === 0): ?>
+                <md-list-item>
+                    <md-icon slot="start">person_alert</md-icon> No se encontraron resultados
+                </md-list-item>
+            <?php else:
                 foreach ($collabs as $row):
                     $menu_id = $menu_id + 1;
                     ?>
@@ -84,8 +88,8 @@ $editPermissionsController = new EditPermissionsController();
                         </span>
                     </md-list-item>
                     <md-divider inset></md-divider>
-                <?php endforeach;
-            } ?>
+                <?php endforeach; endif;
+            ?>
     </div>
 </body>
 

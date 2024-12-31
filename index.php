@@ -29,7 +29,6 @@
     document.adoptedStyleSheets.push(typescaleStyles.styleSheet);
   </script>
 </head>
-<?php if(isset($_SESSION["correo"])) { ?>
 <body>
   <?php
   include("ui/header.php");
@@ -41,5 +40,4 @@
     </div>
   </div>
 </body>
-<?php } else header("Location: index.php") ?>
 </html>

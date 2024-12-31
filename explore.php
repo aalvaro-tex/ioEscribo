@@ -64,11 +64,33 @@
         <md-icon>search</md-icon>
       </md-filled-tonal-icon-button>
     </div>
+    <div style=" width: 85vw">
+      <?php if (empty($_POST["titulo"]) && empty($_POST["id_categoria"])): ?>
+        <h5>Mostrando: todos</h5>
+      <?php elseif (!empty($_POST["titulo"]) && empty($_POST["id_categoria"])): ?>
+        <h5>Mostrando: título que contiene "<?php echo $_POST["titulo"] ?>" </h5>
+      <?php elseif (empty($_POST["titulo"]) && !empty($_POST["id_categoria"])): ?>
+        <h5>Mostrando: categoría <?php echo $exploreController->getCategoryName($_POST["id_categoria"]) ?></h5>
+      <?php else: ?>
+        <h5>Mostrando: título que contiene "<?php echo $_POST["titulo"] ?>" y categoría
+          <?php echo $exploreController->getCategoryName($_POST["id_categoria"]) ?>
+        </h5>
+      <?php endif; ?>
+    </div>
     <md-list id="search-documents-list">
       <?php
       $menu_id = 0;
+      $searchResult;
       if (!empty($_POST["search-articles"])) {
         $searchResult = $exploreController->search($_POST["titulo"], $_POST["id_categoria"]);
+      } else {
+        $searchResult = $exploreController->search('', '');
+      }
+      if ($searchResult->num_rows === 0): ?>
+        <md-list-item>
+          <md-icon slot="start">no_sim</md-icon> No se encontraron resultados
+        </md-list-item>
+      <?php else:
         foreach ($searchResult as $row):
           $menu_id = $menu_id + 1;
           ?>
@@ -85,23 +107,30 @@
                 <md-icon>visibility</md-icon>
               </md-icon-button>
               <!-- opcion: solicitar permiso de edicion -->
-              <form id="request-edit-form-<?php echo $row['id'] ?>" method="post">
-                <input type="hidden" name="id_articulo" id="id_articulo" value="<?php echo $row['id'] ?>">
-                <input type="hidden" name="solicitante" id="solicitante" value="<?php echo $_SESSION['correo'] ?>">
-                <input type="hidden" name="autor" id="autor" value="<?php echo $row['autor'] ?>">
-              </form>
-              <md-icon-button type="submit" name="request-edit" form="request-edit-form-<?php echo $row['id'] ?>"
-                value="Solicitar">
-                <md-icon>edit</md-icon>
-              </md-icon-button>
+              <!-- solo si no es el autor del articulo -->
+              <?php if ($row['autor'] != $_SESSION['correo']): ?>
+                <form id="request-edit-form-<?php echo $row['id'] ?>" method="post">
+                  <input type="hidden" name="id_articulo" id="id_articulo" value="<?php echo $row['id'] ?>">
+                  <input type="hidden" name="solicitante" id="solicitante" value="<?php echo $_SESSION['correo'] ?>">
+                  <input type="hidden" name="autor" id="autor" value="<?php echo $row['autor'] ?>">
+                </form>
+                <md-icon-button type="submit" name="request-edit" form="request-edit-form-<?php echo $row['id'] ?>"
+                  value="Solicitar">
+                  <md-icon>edit</md-icon>
+                </md-icon-button>
+              <?php endif; ?>
               <!-- opcion: descargar articulo -->
-              <form id="download-form-<?php echo $row['id'] ?>" method="post" target="_blank" action="./utils/pdf_article.php" enctype="multipart/form-data">
+              <form id="download-form-<?php echo $row['id'] ?>" method="post" target="_blank"
+                action="./utils/pdf_article.php" enctype="multipart/form-data">
                 <input type="hidden" name="titulo-descarga" id="titulo-descarga" value="<?php echo $row['titulo'] ?>">
-                <input type="hidden" name="descripcion-descarga" id="descripcion-descarga" value="<?php echo $row['descripcion']  ?>">
-                <input type="hidden" name="contenido-descarga" id="contenido-descarga" value="<?php echo $row['contenido']  ?>">
+                <input type="hidden" name="descripcion-descarga" id="descripcion-descarga"
+                  value="<?php echo $row['descripcion'] ?>">
+                <input type="hidden" name="contenido-descarga" id="contenido-descarga"
+                  value="<?php echo $row['contenido'] ?>">
                 <input type="hidden" name="fecha-descarga" id="fecha-descarga" value="<?php echo $row['fecha_creacion'] ?>">
                 <input type="hidden" name="autor-descarga" id="autor-descarga" value="<?php echo $row['autor'] ?>">
-                <input type="hidden" name="categoria-descarga" id="categoria-descarga" value="<?php echo $row['id_categoria'] ?>">
+                <input type="hidden" name="categoria-descarga" id="categoria-descarga"
+                  value="<?php echo $row['id_categoria'] ?>">
                 <input type="hidden" name="id-articulo-descarga" id="id-articulo-descarga" value="<?php echo $row['id'] ?>">
               </form>
               <md-icon-button type="submit" name="download-article" form="download-form-<?php echo $row['id'] ?>"
@@ -112,7 +141,7 @@
           </md-list-item>
           <md-divider inset></md-divider>
         <?php endforeach;
-      } ?>
+      endif ?>
     </md-list>
 </body>
 

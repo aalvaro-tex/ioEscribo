@@ -68,68 +68,73 @@
           <?php
           $menu_id = 0;
           $articles = $myDocumentsController->getAllDocumentsByRol(1);
-          foreach ($articles as $row):
-            $menu_id = $menu_id + 1;
-            ?>
+          if ($articles->num_rows === 0): ?>
             <md-list-item>
-              <md-icon slot="start"><?php
-              // elijo el icono en funcion del rol
-              if ($row['id_rol'] == 1) {
-                echo "person";
-              } else {
-                echo "group";
-              }
-              ?></md-icon>
-              <span style="font-weight:600"><?php echo $row['titulo']; ?></span>
-              <div class="spacer"></div>
-              <span><?php echo $row['fecha_creacion'] ?></span>
-              <span slot="end">
-              <md-icon-button type="button" onclick="showMenu(<?php echo $menu_id ?>, 'a')"
-                id="menu-a-<?php echo $menu_id ?>">
-                  <md-icon>more_vert</md-icon>
-                </md-icon-button>
-              </span>
+              <md-icon slot="start">no_sim</md-icon> No se encontraron resultados
             </md-list-item>
-            <md-divider inset></md-divider>
-            <md-menu positioning="fixed" id="usage-menu-a-<?php echo $menu_id ?>" anchor="menu-a-<?php echo $menu_id ?>">
-              <!-- desplegable con las opciones según rol -->
-              <?php $rol = $myDocumentsController->getRol($row['id']);
-              if ($rol->id_rol == 1): ?>
-                <md-menu-item
-                  onclick='doSelectOption(<?php echo json_encode($row, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES, 1) ?>,1)'>
-                  <span>Ver</span>
-                </md-menu-item>
-                <md-menu-item
-                  onclick='doSelectOption(<?php echo json_encode($row, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES, 1) ?>, 2)'>
-                  <span>Editar</span>
-                </md-menu-item>
-                <md-menu-item
-                  onclick='doSelectOption(<?php echo json_encode($row, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES, 1) ?>, 3)'>
-                  <span>Eliminar</span>
-                </md-menu-item>
-                <md-menu-item>
-                  <span><a href="edit-permissions.php?id_articulo=<?php echo urlencode($row['id']) ?>">Gestionar
-                      permisos</a></span>
-                </md-menu-item>
-              <?php endif;
-              if ($rol->id_rol == 2): ?>
-                <md-menu-item
-                  onclick='doSelectOption(<?php echo json_encode($row, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES, 1) ?>, 1)'>
-                  <span>Ver</span>
-                </md-menu-item>
-                <md-menu-item
-                  onclick='doSelectOption(<?php echo json_encode($row, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES, 1) ?>, 2)'>
-                  <span>Editar</span>
-                </md-menu-item>
-              <?php endif;
-              if ($rol->id_rol == 3): ?>
-                <md-menu-item
-                  onclick='doSelectOption(<?php echo json_encode($row, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES, 1) ?>, 1)'>
-                  Ver
-                </md-menu-item>
-              <?php endif; ?>
-            </md-menu>
-          <?php endforeach; ?>
+          <?php else:
+            foreach ($articles as $row):
+              $menu_id = $menu_id + 1;
+              ?>
+              <md-list-item>
+                <md-icon slot="start"><?php
+                // elijo el icono en funcion del rol
+                if ($row['id_rol'] == 1) {
+                  echo "person";
+                } else {
+                  echo "group";
+                }
+                ?></md-icon>
+                <span style="font-weight:600"><?php echo $row['titulo']; ?></span>
+                <div class="spacer"></div>
+                <span><?php echo $row['fecha_creacion'] ?></span>
+                <span slot="end">
+                  <md-icon-button type="button" onclick="showMenu(<?php echo $menu_id ?>, 'a')"
+                    id="menu-a-<?php echo $menu_id ?>">
+                    <md-icon>more_vert</md-icon>
+                  </md-icon-button>
+                </span>
+              </md-list-item>
+              <md-divider inset></md-divider>
+              <md-menu positioning="fixed" id="usage-menu-a-<?php echo $menu_id ?>" anchor="menu-a-<?php echo $menu_id ?>">
+                <!-- desplegable con las opciones según rol -->
+                <?php $rol = $myDocumentsController->getRol($row['id']);
+                if ($rol->id_rol == 1): ?>
+                  <md-menu-item
+                    onclick='doSelectOption(<?php echo json_encode($row, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES, 1) ?>,1)'>
+                    <span>Ver</span>
+                  </md-menu-item>
+                  <md-menu-item
+                    onclick='doSelectOption(<?php echo json_encode($row, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES, 1) ?>, 2)'>
+                    <span>Editar</span>
+                  </md-menu-item>
+                  <md-menu-item
+                    onclick='doSelectOption(<?php echo json_encode($row, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES, 1) ?>, 3)'>
+                    <span>Eliminar</span>
+                  </md-menu-item>
+                  <md-menu-item>
+                    <span><a href="edit-permissions.php?id_articulo=<?php echo urlencode($row['id']) ?>">Gestionar
+                        permisos</a></span>
+                  </md-menu-item>
+                <?php endif;
+                if ($rol->id_rol == 2): ?>
+                  <md-menu-item
+                    onclick='doSelectOption(<?php echo json_encode($row, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES, 1) ?>, 1)'>
+                    <span>Ver</span>
+                  </md-menu-item>
+                  <md-menu-item
+                    onclick='doSelectOption(<?php echo json_encode($row, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES, 1) ?>, 2)'>
+                    <span>Editar</span>
+                  </md-menu-item>
+                <?php endif;
+                if ($rol->id_rol == 3): ?>
+                  <md-menu-item
+                    onclick='doSelectOption(<?php echo json_encode($row, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES, 1) ?>, 1)'>
+                    Ver
+                  </md-menu-item>
+                <?php endif; ?>
+              </md-menu>
+            <?php endforeach; endif ?>
         </md-list>
       </div>
     </div>
@@ -142,67 +147,73 @@
           <?php
           $menu_id = 0;
           $articles = $myDocumentsController->getAllDocumentsByRol(2);
-          foreach ($articles as $row):
-            $menu_id = $menu_id + 1;
-            ?>
+          if ($articles->num_rows === 0): ?>
             <md-list-item>
-              <md-icon slot="start"><?php
-              // elijo el icono en funcion del rol
-              if ($row['id_rol'] == 1) {
-                echo "person";
-              } else {
-                echo "group";
-              }
-              ?></md-icon>
-              <span style="font-weight:600"><?php echo $row['titulo']; ?></span>
-              <div class="spacer"></div>
-              <span><?php echo $row['fecha_creacion'] ?></span>
-              <span slot="end">
-                <md-icon-button type="button" onclick="showMenu(<?php echo $menu_id ?>, 'c')"
-                id="menu-c-<?php echo $menu_id ?>">
-                  <md-icon>more_vert</md-icon>
-                </md-icon-button>
-              </span>
+              <md-icon slot="start">no_sim</md-icon> No se encontraron resultados
             </md-list-item>
-            <md-divider inset></md-divider>
-            <md-menu positioning="fixed" id="usage-menu-c-<?php echo $menu_id ?>" anchor="menu-c-<?php echo $menu_id ?>">
-              <!-- desplegable con las opciones según rol -->
-              <?php $rol = $myDocumentsController->getRol($row['id']);
-              if ($rol->id_rol == 1): ?>
-                <md-menu-item
-                  onclick='doSelectOption(<?php echo json_encode($row, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES, 1) ?>,1)'>
-                  <span>Ver</span>
-                </md-menu-item>
-                <md-menu-item
-                  onclick='doSelectOption(<?php echo json_encode($row, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES, 1) ?>, 2)'>
-                  <span>Editar</span>
-                </md-menu-item>
-                <md-menu-item
-                  onclick='doSelectOption(<?php echo json_encode($row, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES, 1) ?>, 3)'>
-                  <span>Eliminar</span>
-                </md-menu-item>
-                <md-menu-item>
-                  <span href="edit-permissions.php?id_articulo=<?php echo urlencode($row['id']) ?>">Gestionar permisos</span>
-                </md-menu-item>
-              <?php endif;
-              if ($rol->id_rol == 2): ?>
-                <md-menu-item
-                  onclick='doSelectOption(<?php echo json_encode($row, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES, 1) ?>, 1)'>
-                  <span>Ver</span>
-                </md-menu-item>
-                <md-menu-item
-                  onclick='doSelectOption(<?php echo json_encode($row, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES, 1) ?>, 2)'>
-                  <span>Editar</span>
-                </md-menu-item>
-              <?php endif;
-              if ($rol->id_rol == 3): ?>
-                <md-menu-item
-                  onclick='doSelectOption(<?php echo json_encode($row, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES, 1) ?>, 1)'>
-                  Ver
-                </md-menu-item>
-              <?php endif; ?>
-            </md-menu>
-          <?php endforeach; ?>
+          <?php else:
+            foreach ($articles as $row):
+              $menu_id = $menu_id + 1;
+              ?>
+              <md-list-item>
+                <md-icon slot="start"><?php
+                // elijo el icono en funcion del rol
+                if ($row['id_rol'] == 1) {
+                  echo "person";
+                } else {
+                  echo "group";
+                }
+                ?></md-icon>
+                <span style="font-weight:600"><?php echo $row['titulo']; ?></span>
+                <div class="spacer"></div>
+                <span><?php echo $row['fecha_creacion'] ?></span>
+                <span slot="end">
+                  <md-icon-button type="button" onclick="showMenu(<?php echo $menu_id ?>, 'c')"
+                    id="menu-c-<?php echo $menu_id ?>">
+                    <md-icon>more_vert</md-icon>
+                  </md-icon-button>
+                </span>
+              </md-list-item>
+              <md-divider inset></md-divider>
+              <md-menu positioning="fixed" id="usage-menu-c-<?php echo $menu_id ?>" anchor="menu-c-<?php echo $menu_id ?>">
+                <!-- desplegable con las opciones según rol -->
+                <?php $rol = $myDocumentsController->getRol($row['id']);
+                if ($rol->id_rol == 1): ?>
+                  <md-menu-item
+                    onclick='doSelectOption(<?php echo json_encode($row, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES, 1) ?>,1)'>
+                    <span>Ver</span>
+                  </md-menu-item>
+                  <md-menu-item
+                    onclick='doSelectOption(<?php echo json_encode($row, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES, 1) ?>, 2)'>
+                    <span>Editar</span>
+                  </md-menu-item>
+                  <md-menu-item
+                    onclick='doSelectOption(<?php echo json_encode($row, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES, 1) ?>, 3)'>
+                    <span>Eliminar</span>
+                  </md-menu-item>
+                  <md-menu-item>
+                    <span href="edit-permissions.php?id_articulo=<?php echo urlencode($row['id']) ?>">Gestionar
+                      permisos</span>
+                  </md-menu-item>
+                <?php endif;
+                if ($rol->id_rol == 2): ?>
+                  <md-menu-item
+                    onclick='doSelectOption(<?php echo json_encode($row, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES, 1) ?>, 1)'>
+                    <span>Ver</span>
+                  </md-menu-item>
+                  <md-menu-item
+                    onclick='doSelectOption(<?php echo json_encode($row, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES, 1) ?>, 2)'>
+                    <span>Editar</span>
+                  </md-menu-item>
+                <?php endif;
+                if ($rol->id_rol == 3): ?>
+                  <md-menu-item
+                    onclick='doSelectOption(<?php echo json_encode($row, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES, 1) ?>, 1)'>
+                    Ver
+                  </md-menu-item>
+                <?php endif; ?>
+              </md-menu>
+            <?php endforeach; endif ?>
         </md-list>
       </div>
     </div>
