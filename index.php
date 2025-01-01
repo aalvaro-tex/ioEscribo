@@ -34,10 +34,12 @@
     <?php
     session_start();
     ?>
-    <div class="container">
-        <div class="login">
-            <button class="btn-login" onclick="window.location.href='./sign-up.php'">Crear cuenta</button>
-            <button class="btn-login" onclick="window.location.href='./login.php'">Iniciar sesión</button>
+    <div class="container" id="index-container">
+        <div class="login" style="height: 20vh;">
+            <md-filled-tonal-button class="btn-login" onclick="window.location.href='./sign-up.php'">Crear
+                cuenta</md-filled-tonal-button>
+            <md-filled-tonal-button class="btn-login" onclick="window.location.href='./login.php'">Iniciar
+                sesión</md-filled-tonal-button>
         </div>
     </div>
 </body>
