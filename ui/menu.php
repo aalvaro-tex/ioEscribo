@@ -38,9 +38,6 @@
             Explorar
         </md-filled-tonal-button>
         <div class="spacer"></div>
-        <md-filled-tonal-button href="settings.php">
-            Configuración
-        </md-filled-tonal-button>
     </div>
 </body>
 

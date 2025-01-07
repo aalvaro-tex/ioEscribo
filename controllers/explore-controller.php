@@ -31,7 +31,7 @@ class ExploreController
         return $this->exploreService->getCategoryName($id);
     }
 
-    public function search($titulo, $id_categoria)
+    public function search($titulo = null, $id_categoria = null)
     {
         return $this->exploreService->search($titulo, $id_categoria);
     }
@@ -49,12 +49,29 @@ class ExploreController
 
 if (!empty($_POST["search-articles"])) {
     $exploreController = new ExploreController();
-    $searchResult = $exploreController->search($_POST["titulo"], $_POST["id_categoria"]);
-    return $searchResult;
+    print_r($_POST);
+    if (empty($_POST["titulo"]) && empty($_POST["id_categoria"])) {
+        print_r("Centro");
+        $searchResult = $exploreController->search(null, null);
+        return $searchResult;
+    } else if (empty($_POST["titulo"]) && !empty($_POST["id_categoria"])) {
+        print_r("Centro2");
+        $searchResult = $exploreController->search(null, $_POST["id_categoria"]);
+        return $searchResult;
+    } else if (empty($_POST["id_categoria"]) && !empty($_POST["titulo"])) {
+        print_r("Centro3");
+        $searchResult = $exploreController->search($_POST["titulo"], null);
+        return $searchResult;
+    } else {
+        print_r("Centro4");
+        $searchResult = $exploreController->search($_POST["titulo"], $_POST["id_categoria"]);
+        return $searchResult;
+    }
 }
 
 if (!empty($_POST["request-edit"])) {
     $exploreController = new ExploreController();
-    $exploreController->sendEditRequest($_POST["autor"], $_POST["solicitante"], $_POST["id_articulo"]);
-    echo "Llego";
+    $checkedAutor = htmlspecialchars($_POST["autor"]);
+    $checkedSolicitante = htmlspecialchars($_POST["solicitante"]);
+    $exploreController->sendEditRequest($checkedAutor, $checkedSolicitante, $_POST["id_articulo"]);
 }

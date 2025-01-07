@@ -68,7 +68,7 @@
           <?php
           $menu_id = 0;
           $articles = $myDocumentsController->getAllDocumentsByRol(1);
-          if ($articles->num_rows === 0): ?>
+          if (empty($articles)): ?>
             <md-list-item>
               <md-icon slot="start">no_sim</md-icon> No se encontraron resultados
             </md-list-item>
@@ -99,7 +99,7 @@
               <md-menu positioning="fixed" id="usage-menu-a-<?php echo $menu_id ?>" anchor="menu-a-<?php echo $menu_id ?>">
                 <!-- desplegable con las opciones según rol -->
                 <?php $rol = $myDocumentsController->getRol($row['id']);
-                if ($rol->id_rol == 1): ?>
+                if ($rol['id_rol'] == 1): ?>
                   <md-menu-item
                     onclick='doSelectOption(<?php echo json_encode($row, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES, 1) ?>,1)'>
                     <span>Ver</span>
@@ -117,7 +117,7 @@
                         permisos</a></span>
                   </md-menu-item>
                 <?php endif;
-                if ($rol->id_rol == 2): ?>
+                if ($rol['id_rol'] == 2): ?>
                   <md-menu-item
                     onclick='doSelectOption(<?php echo json_encode($row, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES, 1) ?>, 1)'>
                     <span>Ver</span>
@@ -127,7 +127,7 @@
                     <span>Editar</span>
                   </md-menu-item>
                 <?php endif;
-                if ($rol->id_rol == 3): ?>
+                if ($rol['id_rol'] == 3): ?>
                   <md-menu-item
                     onclick='doSelectOption(<?php echo json_encode($row, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES, 1) ?>, 1)'>
                     Ver
@@ -147,7 +147,7 @@
           <?php
           $menu_id = 0;
           $articles = $myDocumentsController->getAllDocumentsByRol(2);
-          if ($articles->num_rows === 0): ?>
+          if (empty($articles)): ?>
             <md-list-item>
               <md-icon slot="start">no_sim</md-icon> No se encontraron resultados
             </md-list-item>

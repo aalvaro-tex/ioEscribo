@@ -31,6 +31,7 @@
 <body>
     <?php
     session_start();
+
     if (!isset($_SESSION["nombre"])) {
         header("Location: login.php");
     }
@@ -42,10 +43,6 @@
             <p>Usuario: <span style="font-weight: 600;"><?php echo $_SESSION['nombre']; ?></span></p>
             <p>Correo: <span style="font-weight: 600;"><?php echo $_SESSION['correo']; ?></span></p>
         </div>
-        <!-- 
-        <md-filled-tonal-icon-button href="my-notifications.php">
-            <md-icon>notifications</md-icon>
-        </md-filled-tonal-icon-button> -->
         <div class="button">
             <md-filled-tonal-icon-button href="my-notifications.php">
                 <md-icon>notifications</md-icon>

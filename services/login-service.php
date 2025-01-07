@@ -5,31 +5,33 @@ class LoginService
 {
 
     private $conexion;
-    private $myNotificationsService;
 
     public function __construct()
     {
-        $this->conexion = new ConexionBD();
-        $this->myNotificationsService = new MyNotificationsService();
+        $this->conexion = new PDO("mysql:host=localhost;dbname=ioescribo", "root", "");
+        $this->conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 
     public function login($correo, $pssword)
     {
-        $query = $this->conexion->query("SELECT * FROM usuario WHERE email='$correo' AND pssword= MD5('$pssword')");
-        if (!$query) {
+        print_r($correo);
+        print_r($pssword);
+        $sentencia = $this->conexion->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+        $sentencia = $this->conexion->prepare("SELECT * FROM usuario WHERE email = :correo AND pssword = MD5(:pssword)");
+        $sentencia->execute(array(':correo' => $correo, ':pssword' => $pssword));
+        if (!$sentencia->execute(array(':correo' => $correo, ':pssword' => $pssword))) {
+            print_r("Excepcion");
             throw new Exception("Error en la petición a base de datos.");
-        }
-        if ($datos = $query->fetch_object()) {
-            $_SESSION['nombre'] = $datos->nombre;
-            $_SESSION['correo'] = $datos->email;
-            $count_query = "SELECT COUNT(*) AS count FROM solicitud 
-                WHERE autor='$datos->email' AND estado='PENDIENTE'";
-            $result = $this->conexion->query($count_query);
-            print_r($result->fetch_object());
-            $_SESSION['solicitudes'] = $result->fetch_object();
-            return true;
         } else {
-            return false;
+            $datos = $sentencia->fetchAll(PDO::FETCH_ASSOC);
+            if ($datos) {
+                $_SESSION['nombre'] = $datos[0]['nombre'];
+                $_SESSION['correo'] = $datos[0]['email'];
+                return true;
+            } else {
+                return false;
+            }
+
         }
     }
 }

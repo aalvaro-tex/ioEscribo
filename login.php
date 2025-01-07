@@ -41,13 +41,13 @@
             <?php
             include("controllers/login-controller.php");
             ?>
-            <form method="post" action="">
+            <form method="post" action="" id="login-form">
                 <md-outlined-text-field label="Correo electrónico" type="email" name="correo"
                     required></md-outlined-text-field>
                 <md-outlined-text-field label="Contraseña" type="password" name="pssword"
                     required></md-outlined-text-field>
                 <md-filled-tonal-icon-button style="width:56px;height:56px;" type="submit" name="btn-login"
-                    class="btn-login" value="Entrar">
+                    class="btn-login" value="Entrar" form="login-form">
                     <md-icon>login</md-icon>
                 </md-filled-tonal-icon-button>
             </form>

@@ -249,8 +249,6 @@ function loadUserInfo(user) {
     const email = document.getElementById('user-email');
     email.value = user['email'];
 
-    const password = document.getElementById('user-pssword');
-    password.value = user['pssword'];
 }
 
 function viewPassword() {

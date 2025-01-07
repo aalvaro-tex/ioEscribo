@@ -34,12 +34,21 @@
     <?php
     session_start();
     ?>
-    <div class="container" id="index-container">
-        <div class="login" style="height: 20vh;">
-            <md-filled-tonal-button class="btn-login" onclick="window.location.href='./sign-up.php'">Crear
-                cuenta</md-filled-tonal-button>
-            <md-filled-tonal-button class="btn-login" onclick="window.location.href='./login.php'">Iniciar
-                sesión</md-filled-tonal-button>
+    <div class="container">
+        <div class="index_div" style="width: 100%;">
+            <div class="logo-index">
+                <img src="./assets/img/ioEscribo_logo.png" alt="Logo" class="logo" id="logo-login" />
+                <h1> ioEscribo </h1>
+                <p>¡Escribe y comparte tus historias!</p>
+            </div>
+            <div class="login">
+                <md-filled-tonal-button class="btn-login" onclick="window.location.href='./sign-up.php'"> <md-icon
+                        slot="icon">person_add</md-icon>Crear
+                    cuenta</md-filled-tonal-button>
+                <md-filled-tonal-button class="btn-login" onclick="window.location.href='./login.php'"> <md-icon
+                        slot="icon">login</md-icon>Iniciar
+                    sesión</md-filled-tonal-button>
+            </div>
         </div>
     </div>
 </body>

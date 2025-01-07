@@ -2,7 +2,8 @@
 include("controllers/conexion_bd.php");
 include("services/my-documents-service.php");
 
-class MyDocumentsController {
+class MyDocumentsController
+{
 
     private $myDocumentsService;
     private $login;
@@ -49,15 +50,18 @@ class MyDocumentsController {
         $this->myDocumentsService->deleteArticle($id_articulo);
     }
 
-    public function updateArticle($id_articulo, $descripcion, $titulo, $id_categoria, $contenido){
+    public function updateArticle($id_articulo, $descripcion, $titulo, $id_categoria, $contenido)
+    {
         $this->myDocumentsService->updateArticle($id_articulo, $descripcion, $titulo, $id_categoria, $contenido);
     }
 }
 
 if (!empty($_POST["add-document"])) {
     $myDocumentsController = new MyDocumentsController();
-    echo $_POST["titulo"];
-    $myDocumentsController->addArticle($_POST["titulo"], $_POST["descripcion"], $_POST["id_categoria"], $_POST["contenido"]);
+    $checkedTitulo = htmlspecialchars($_POST["titulo"]);
+    $checkedDescripcion = htmlspecialchars($_POST["descripcion"]);
+    $checkedContenido = htmlspecialchars($_POST["contenido"]);
+    $myDocumentsController->addArticle($checkedTitulo, $checkedDescripcion, $_POST["id_categoria"], $checkedContenido);
 }
 
 if (!empty($_POST["delete-document"])) {

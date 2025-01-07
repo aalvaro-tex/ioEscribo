@@ -70,7 +70,7 @@ $editPermissionsController = new EditPermissionsController();
             <?php
             $menu_id = 0;
             $collabs = $editPermissionsController->getCollaborators($editPermissionsController->id_articulo);
-            if ($collabs->num_rows === 0): ?>
+            if (empty($collabs)): ?>
                 <md-list-item>
                     <md-icon slot="start">person_alert</md-icon> No se encontraron resultados
                 </md-list-item>

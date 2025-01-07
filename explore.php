@@ -46,7 +46,7 @@
         <md-outlined-text-field placeholder="Buscar por nombre" style="width:60vw" minlength="3" name="titulo">
           <md-icon slot="trailing-icon">search</md-icon>
         </md-outlined-text-field>
-        <md-outlined-select label="Categoría" name="id_categoria" id="article-category" value="" style="width:20vw">
+        <md-outlined-select label="Categoría" name="id_categoria" id="article-category" value=null style="width:20vw">
           <md-select-option value="">
             <div slot="headline"></div>
           </md-select-option>
@@ -70,7 +70,8 @@
       <?php elseif (!empty($_POST["titulo"]) && empty($_POST["id_categoria"])): ?>
         <h5>Mostrando: título que contiene "<?php echo $_POST["titulo"] ?>" </h5>
       <?php elseif (empty($_POST["titulo"]) && !empty($_POST["id_categoria"])): ?>
-        <h5>Mostrando: categoría <?php echo $exploreController->getCategoryName($_POST["id_categoria"]) ?></h5>
+        <h5>Mostrando: categoría <?php print ($exploreController->getCategoryName($_POST["id_categoria"])['nombre']) ?>
+        </h5>
       <?php else: ?>
         <h5>Mostrando: título que contiene "<?php echo $_POST["titulo"] ?>" y categoría
           <?php echo $exploreController->getCategoryName($_POST["id_categoria"]) ?>
@@ -84,9 +85,9 @@
       if (!empty($_POST["search-articles"])) {
         $searchResult = $exploreController->search($_POST["titulo"], $_POST["id_categoria"]);
       } else {
-        $searchResult = $exploreController->search('', '');
+        $searchResult = $exploreController->search(null, null);
       }
-      if ($searchResult->num_rows === 0): ?>
+      if (empty($searchResult)): ?>
         <md-list-item>
           <md-icon slot="start">no_sim</md-icon> No se encontraron resultados
         </md-list-item>

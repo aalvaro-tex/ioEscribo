@@ -61,7 +61,7 @@ $myNotificationsController = new MyNotificationsController();
                 <md-list id="edit-requests-list">
                     <?php
                     $searchResult = $myNotificationsController->getNotifications();
-                    if ($searchResult->num_rows === 0): ?>
+                    if (empty($searchResult)): ?>
                         <md-list-item>
                             <md-icon slot="start">notifications_off</md-icon> No se encontraron resultados
                         </md-list-item>
@@ -99,7 +99,7 @@ $myNotificationsController = new MyNotificationsController();
                 <md-list id="other-notifications-list">
                     <?php
                     $searchResult = $myNotificationsController->getMyOtherNotifications();
-                    if ($searchResult->num_rows === 0): ?>
+                    if (empty($searchResult)): ?>
                         <md-list-item>
                             <md-icon slot="start">notifications_off</md-icon> No se encontraron resultados
                         </md-list-item>

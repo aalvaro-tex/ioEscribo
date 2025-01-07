@@ -14,12 +14,16 @@ class LoginController
 
     public function login($correo, $pssword)
     {
-        if ($_POST["correo"] == "" || $_POST["pssword"] == "") {
+        if (empty($_POST["correo"]) || empty($_POST["pssword"])) {
             echo '<p style="margin:0px; color:red"> Rellena todos los campos </p>';
         } else {
             $correo = $_POST["correo"];
             $pssword = $_POST["pssword"];
+            print_r($correo);
+            print_r($pssword);
+            print_r($this->loginService->login($correo, $pssword));
             if ($this->loginService->login($correo, $pssword)) {
+                echo "entro";
                 header("Location:my-documents.php");
             } else {
                 echo '<p style="margin:0px; color:red"> Usuario o contraseña incorrectos </p>';
@@ -30,5 +34,7 @@ class LoginController
 
 if (!empty($_POST["btn-login"])) {
     $loginController = new LoginController();
-    $loginController->login($_POST["correo"], $_POST["pssword"]);
+    $checkedCorreo = htmlspecialchars($_POST["correo"]);
+    $checkedPssword = htmlspecialchars($_POST["pssword"]);
+    $loginController->login($checkedCorreo, $checkedPssword);
 }

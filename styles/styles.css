@@ -63,8 +63,12 @@ input {
     height: 95vh;
 }
 
-#index-container {
-    background-image: url(./assets/img/fondo_index.jpeg);
+.index_div {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    flex-direction: column !important;
+    background-image: url(../assets/img/fondo_index.jpeg);
 }
 
 .contains-page {

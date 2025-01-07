@@ -50,23 +50,10 @@ $userController = new UserController();
       <md-outlined-text-field label="Correo electrónico" type="text" name="email" disabled id="user-email" value=""
         style="width:60%;">
       </md-outlined-text-field>
-      <!-- no se si dejar editar los datos o no --> <!--
-      <md-filled-tonal-icon-button style="width:56px;height:56px;">
-        <md-icon>edit</md-icon>
-      </md-filled-tonal-icon-button> -->
     </div>
-          <!-- no se si dejar algo de la contraseña --> <!--
-    <h3 style="width:85vw;padding-left:10px;">Mi contraseña</h3>
-    <div class="password-info">
-      <md-outlined-text-field label="Contraseña" type="password" name="nombre" disabled id="user-pssword" value="">
-      </md-outlined-text-field>
-      <md-filled-tonal-icon-button style="width:56px;height:56px;" onclick="viewPassword()">
-        <md-icon id="pssword-icon">visibility</md-icon>
-      </md-filled-tonal-icon-button>
-    </div>
-    -->
     <div class="delete-account">
-      <md-filled-tonal-button onclick='openDeleteAccountModal(<?php echo json_encode($userController->getUserByLogin())?>)'>
+      <md-filled-tonal-button
+        onclick='openDeleteAccountModal(<?php echo json_encode($userController->getUserByLogin()) ?>)'>
         <md-icon id="pssword-icon" slot="icon">delete</md-icon>
         Eliminar cuenta
       </md-filled-tonal-button>
@@ -81,8 +68,8 @@ $userController = new UserController();
   <h4 slot="content">
     <form id="delete-account-form" method="post">
       <h4>¿Seguro que deseas eliminar la siguiente cuenta?</h4>
-    <md-outlined-text-field label="Login" type="email" name="login" id="delete-account-login"
-    required readonly ></md-outlined-text-field>
+      <md-outlined-text-field label="Login" type="email" name="login" id="delete-account-login" required
+        readonly></md-outlined-text-field>
     </form>
   </h4>
   <div slot="actions">
